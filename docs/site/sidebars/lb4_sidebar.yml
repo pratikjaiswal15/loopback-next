@@ -116,6 +116,10 @@ children:
       url: Decorators_authenticate.html
       output: 'web, pdf'
 
+    - title: 'Service Decorators'
+      url: Decorators_service.html
+      output: 'web, pdf'
+
     - title: 'Repository Decorators'
       url: Decorators_repository.html
       output: 'web, pdf'
