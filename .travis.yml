@@ -23,8 +23,8 @@ matrix:
   include:
     - node_js: "12"
       os: osx
-      # using the default script to build & run the tests
 
+      # using the default script to build & run the tests
     - node_js: "8"
       os: linux
       env: TASK=code-lint
@@ -67,6 +67,26 @@ matrix:
         - npm run postinstall -- --scope "@loopback/test-repository-mysql" --include-filtered-dependencies
         - npm run build -- --scope "@loopback/test-repository-mysql" --include-filtered-dependencies
         - cd acceptance/repository-mysql && npm run mocha
+    - node_js: "10"
+      os: linux
+      env:
+        - TASK=test-repository-cloudant
+        - CLOUDANT_DATABASE=testdb
+        - CLOUDANT_USER=admin
+        - CLOUDANT_PASSWORD=pass
+        - CLOUDANT_PORT=5984
+      services:
+        - couchdb
+      before_script:
+        - curl http://localhost:5984
+        - curl -X GET http://localhost:5984/_membership
+        - curl -X PUT http://localhost:5984/testdb
+        - curl -X GET http://localhost:5984/testdb/_all_docs
+        # - curl -X PUT http://localhost:5984/_config/admins/admin -d '"pass"'
+      script:
+        - npm run postinstall -- --scope "@loopback/test-repository-cloudant" --include-dependencies
+        - npm run build -- --scope "@loopback/test-repository-cloudant" --include-dependencies
+        - cd acceptance/repository-cloudant && npm run mocha
 
 branches:
   only:
