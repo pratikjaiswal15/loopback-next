@@ -72,6 +72,8 @@ matrix:
       env:
         - TASK=test-repository-cloudant
         - CLOUDANT_DATABASE=testdb
+        - CLOUDANT_USER=admin
+        - CLOUDANT_PASSWORD=pass
         - CLOUDANT_PORT=5984
       services:
         - couchdb
@@ -79,7 +81,7 @@ matrix:
         - curl http://localhost:5984
         - curl -X PUT http://localhost:5984/testdb
         - curl -X GET http://localhost:5984/testdb/_all_docs
-        # - curl -X PUT http://localhost:5984/_config/admins/admin -d '"pass"'
+        - curl -X PUT http://localhost:5984/_node/couchdb@localhost/_config/admins/admin -d '"pass"'
       script:
         - npm run postinstall -- --scope "@loopback/test-repository-cloudant" --include-dependencies
         - npm run build -- --scope "@loopback/test-repository-cloudant" --include-dependencies
