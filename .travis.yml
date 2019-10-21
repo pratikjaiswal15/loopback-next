@@ -80,8 +80,9 @@ matrix:
       before_script:
         - curl http://localhost:5984
         - curl -X PUT http://localhost:5984/testdb
-        - curl -X GET http://localhost:5984/_utils
         - curl -X PUT http://localhost:5984/_node/couchdb@localhost/_config/admins/admin -d '"pass"'
+        - curl -s -X PUT http://localhost:5984/_config/admins/admin -d '"pass"'
+
       script:
         - npm run postinstall -- --scope "@loopback/test-repository-cloudant" --include-dependencies
         - npm run build -- --scope "@loopback/test-repository-cloudant" --include-dependencies
