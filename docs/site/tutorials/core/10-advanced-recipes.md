@@ -21,7 +21,7 @@ You can create your own decorator:
 
    ```ts
    export function globalInterceptor(group?: string) {
-     return bind({tags: {}});
+     bind({tags: [ContextTags.GLOBAL_INTERCEPTOR]});
    }
    ```
 
@@ -32,6 +32,9 @@ export function env(name: string) {
   return inject('', {resolve: () => process.env[name]});
 }
 ```
+
+For a complete example, see
+https://github.com/strongloop/loopback-next/blob/master/examples/context/src/custom-inject-decorator.ts.
 
 # Class factory to allow parameterized decorations
 
@@ -44,7 +47,7 @@ function createControllerClass(version: string, basePath: string) {
 }
 ```
 
-For complete example, see
+For a complete example, see
 [parameterized-decoration.ts](https://github.com/strongloop/loopback-next/blob/master/examples/context/src/parameterized-decoration.ts).
 
 # Trigger dependency injection with an explicit context
