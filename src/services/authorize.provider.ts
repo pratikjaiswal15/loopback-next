@@ -16,7 +16,7 @@ export class MyAuthorizationProvider implements Provider<Authorizer> {
     metadata: AuthorizationMetadata,
   ) {
 
-    console.log('not working')
+    console.log('authorization provider not getting called')
     const clientRole = authorizationCtx.principals[0].role;
     const allowedRoles = metadata.allowedRoles;
     return allowedRoles?.includes(clientRole)
